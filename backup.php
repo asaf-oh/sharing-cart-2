@@ -39,8 +39,8 @@ try {
     $worker->beginPreferences();
 
     // ZIPファイル名設定
-    $zipname = sharing_cart_table::gen_zipname($worker->getUnique());
-    $worker->setZipName($zipname);
+    /*    $zipname = sharing_cart_table::gen_zipname($worker->getUnique());
+	  $worker->setZipName($zipname);*/
 
     // モジュールをバックアップリストに追加
     $worker->addModule($module, $cm->id);
@@ -59,7 +59,8 @@ try {
     $sharing_cart->icon = addslashes($cm->icon);
     $sharing_cart->text = addslashes($module->name == 'label' ? $cm->extra : $cm->name);
     $sharing_cart->time = $worker->getUnique(); // ZIP名生成に使用したユニーク値 (=タイムスタンプ)
-    $sharing_cart->file = $zipname;
+    $sharing_cart->contextid = $worker->getContextID();
+    $sharing_cart->fileid = $worker->getFileID();
     $sharing_cart->sort = 0;
     sharing_cart_table::insert_record($sharing_cart);
 

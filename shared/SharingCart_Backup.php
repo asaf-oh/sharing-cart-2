@@ -11,6 +11,9 @@ require_once $CFG->libdir.'/blocklib.php';
 
 class SharingCart_Backup extends SharingCart_BackupRestoreBase
 {
+    protected $contextid;
+    protected $fileid;
+
 	/* implements */ protected function requireCapabilities($course_id)
 	{
 		$context = get_context_instance(CONTEXT_COURSE, $course_id);
@@ -209,12 +212,27 @@ class SharingCart_Backup extends SharingCart_BackupRestoreBase
 	{
 		$this->zip_userfile[$filename] = $path;
 	}
+
+	public function getFileID()
+	{
+	    return $this->fileid;
+	}	
+
+	public function getContextID()
+	{
+	    return $this->contextid;
+	}	
+
 	
 	public function execute()
 	{
 	  global $USER;
 	  $bc = new backup_controller(backup::TYPE_1ACTIVITY, $this->cm_id, backup::FORMAT_MOODLE,	backup::INTERACTIVE_NO, backup::MODE_GENERAL, $USER->id);
 	  $bc->execute_plan();
+	  $results = $bc->get_results();
+	  $file = $results["backup_destination"];
+	  $this->contextid = $file->get_contextid();
+	  $this->fileid = $file->get_id();
 	  $bc->destroy();
 	  
 	  //		$this->debug->trace();

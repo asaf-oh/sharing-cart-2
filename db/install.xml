@@ -11,9 +11,10 @@
         <FIELD NAME="name" TYPE="char" LENGTH="32" NOTNULL="true" DEFAULT="" SEQUENCE="false" ENUM="false" PREVIOUS="userid" NEXT="icon"/>
         <FIELD NAME="icon" TYPE="char" LENGTH="32" NOTNULL="true" DEFAULT="" SEQUENCE="false" ENUM="false" PREVIOUS="name" NEXT="text"/>
         <FIELD NAME="text" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false" ENUM="false" PREVIOUS="icon" NEXT="time"/>
-        <FIELD NAME="time" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="text" NEXT="file"/>
-        <FIELD NAME="file" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false" ENUM="false" PREVIOUS="time" NEXT="tree"/>
-        <FIELD NAME="tree" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false" ENUM="false" PREVIOUS="file" NEXT="sort"/>
+        <FIELD NAME="time" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="text" NEXT="contextid"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="context id" PREVIOUS="time" NEXT="fileid"/>
+        <FIELD NAME="fileid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="file id" PREVIOUS="contextid" NEXT="tree"/>
+        <FIELD NAME="tree" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT="" SEQUENCE="false" ENUM="false" PREVIOUS="fileid" NEXT="sort"/>
         <FIELD NAME="sort" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" ENUM="false" PREVIOUS="tree"/>
       </FIELDS>
       <KEYS>
