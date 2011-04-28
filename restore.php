@@ -4,6 +4,7 @@ require_once '../../config.php';
 
 //error_reporting(E_ALL);
 
+require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 require_once './shared/SharingCart_Restore.php';
 require_once './sharing_cart_table.php';
 
@@ -25,7 +26,16 @@ $sharing_cart->userid == $USER->id
 
 $fs = get_file_storage();
 $file = $fs->get_file_by_id($sharing_cart->fileid);
-$file->copy_content_to($CFG->dataroot."/temp/backup/backup.mbz");
+$packer = get_file_packer('application/zip');
+$packer->extract_to_pathname($file, $CFG->dataroot."/temp/backup/sharing_cart");
+
+$rc = new restore_controller("sharing_cart", $course_id, backup::INTERACTIVE_NO,
+			     backup::MODE_IMPORT, $USER->id, backup::TARGET_CURRENT_ADDING);
+
+$rc->execute_precheck(true);
+// $rc->get_precheck_results();
+$rc->execute_plan();
+redirect($return_to);
 
 try {
 
