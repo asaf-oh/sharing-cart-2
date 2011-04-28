@@ -82,9 +82,13 @@ class sharing_cart_plugin_repository implements sharing_cart_plugin
 /** internals **/
 	public function __construct()
 	{
-	  $this->config = sharing_cart_plugins::get_config('repository', $GLOBALS['USER']->id);
+	    try {
+		$this->config = sharing_cart_plugins::get_config('repository', $GLOBALS['USER']->id);
+	    } catch (Exception $e) {
+		$this->config = array();
+	    }
 		if (!is_array($this->config)) {
-			$this->config = array();
+		    	$this->config = array();
 		}
 		
 		$this->dir = $GLOBALS['CFG']->wwwroot.'/blocks/sharing_cart/plugins/repository';
