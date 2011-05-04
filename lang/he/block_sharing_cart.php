@@ -1,12 +1,12 @@
 <?php
 
-$string['pluginname'] = 'עגלת שיתוף';
-$string['backup'] = 'Copy to Sharing Cart';
-$string['restore'] = 'Copy to course';
+$string['pluginname'] = 'כרטיס שיתוף';
+$string['backup'] = 'העתק לכרטיס שיתוף';
+$string['restore'] = 'העתק לקורס';
 $string['movedir'] = 'Move into folder';
-$string['copyhere'] = 'Copy here';
+$string['copyhere'] = 'העתק לכאן';
 $string['notarget'] = 'Target not found';
-$string['clipboard'] = 'Copying this shared item';
+$string['clipboard'] = 'מעתיק פריט משותף זה';
 $string['bulkdelete'] = 'Bulk delete';
 $string['rootdir'] = '/';
 $string['confirm_backup'] = 'Are you sure you want to copy to Sharing Cart?';
